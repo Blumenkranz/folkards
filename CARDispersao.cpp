@@ -123,7 +123,7 @@ public:
         }
         else
         {
-            cout << "Mao Vazia!" << endl;
+            cout << "Lista Vazia!" << endl;
         }
     }
 
@@ -142,9 +142,42 @@ public:
         }
         else
         {
-            cout << "Mao Vazia!" << endl;
+            cout << "Lista Vazia!" << endl;
         }
     }
+
+    void searchElement(string key_name)
+    {
+        if(size > 0)
+        {
+            Node *temp;
+            temp = head;
+            bool is_here = false;
+            int pos = 0;
+            int pos_found = 0;
+            while(temp!=NULL)
+            {
+                if(temp->d_.getName() == key_name)
+                {
+                    is_here = true;
+                    pos_found = pos;
+                }
+                temp=temp->next;
+                pos++;
+            }
+            switch(is_here)
+            {
+                case false: {cout << "Elemento não encontrado nesta lista!" << endl; break;}
+                case true: {cout << "Elemento encontrado nesta lista! Posição: [" << pos_found << "] " << endl; break;}
+            }
+        }
+        else
+        {
+            cout << "Lista Vazia!" << endl;
+        }
+    }
+
+
 
     int getSize()
     {
@@ -253,6 +286,7 @@ class table
                 case 2:{cout << "Hash Divisao selecionada! \n" << endl; run_d_hash();break;}
                 case 3:{cout << "Hash Multiplicacao selecionada! \n" << endl; run_m_hash();break;}
             }
+
         }
 
         void run_p_hash()
@@ -316,6 +350,16 @@ class table
         void start()
         {
             choose_your_hash();
+            string search_str;
+            cin.ignore();
+            cout << "Digite o nome de uma carta para ser buscada: ";
+            getline(cin,search_str);
+            for(int i = 0; i < hash_size; i++)
+            {
+                cout << " Endereço " << i << ": \n";
+                tabela_dispersao[i].searchElement(search_str);
+                cout << endl;
+            }
             
         }
         
